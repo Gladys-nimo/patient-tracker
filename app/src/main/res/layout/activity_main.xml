@@ -23,16 +23,26 @@
         android:textColor="@color/colorTextIcon"
         android:textSize="40sp"
         android:textStyle="bold"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationEditText"
+        android:background="@color/colorTextIcon"
+        android:layout_above="@+id/findHospitalButton"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:hint="Enter location"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/addPatientButton"
+        android:id="@+id/findHospitalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/blue_700"
         android:textColor="@color/colorTextIcon"
-        android:text="Add Patient" />
+        android:text="find hospital" />
 
 
 
