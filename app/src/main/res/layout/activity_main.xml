@@ -17,12 +17,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="PatientTracker"
         android:layout_marginTop="35dp"
-        android:id="@+id/appNameTextView"
-        android:textColor="@color/colorTextIcon"
+        android:fontFamily="@font/berkshire_swash"
+        android:text="PatientTracker"
+        android:textColor="@color/black"
         android:textSize="40sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="134dp"
+        android:text="Here are some of the towns covered:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="normal" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
