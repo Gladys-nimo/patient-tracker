@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mFindHospitalButton;
     private EditText mLocationEditText;
+    private TextView mAppNameTextView;
 
 
     @Override
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         mLocationEditText = (EditText) findViewById(R.id.locationEditText);
         mFindHospitalButton = (Button) findViewById(R.id.findHospitalButton);
+        mAppNameTextView = (TextView) findViewById(R.id.appNameTextView);
+
         mFindHospitalButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

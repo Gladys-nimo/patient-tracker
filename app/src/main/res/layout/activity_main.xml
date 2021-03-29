@@ -25,6 +25,19 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationEditText"
+        android:background="@color/colorTextIcon"
+        android:layout_above="@+id/findHospitalButton"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:hint="Enter location"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,23 +49,10 @@
         android:textStyle="normal" />
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/locationEditText"
-        android:background="@color/colorTextIcon"
-        android:layout_above="@+id/findHospitalButton"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp"
-        android:hint="Enter location"
-        android:layout_centerHorizontal="true" />
-
-
 
     <Button
-        android:id="@+id/addPatientButton"
+        android:id="@+id/findHospitalButton"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
