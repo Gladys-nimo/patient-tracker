@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 
 public class HospitalActivity extends AppCompatActivity {
-    private TextView mhospitalTextView;
+    private TextView mHospitalTextView;
     private ListView mListView;
     private String[] hospitals = new String[]{"Getrude", "Agakhan",
             "Kenyatta", "Nairobi women's", "Nairobi west", "caren hospital"};
@@ -21,12 +21,13 @@ public class HospitalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital);
 
-        mhospitalTextView = (TextView) findViewById(R.id.hospitalTextView);
         mListView = (ListView) findViewById(R.id.listView);
+        mHospitalTextView = (TextView) findViewById(R.id.hospitalTextView);
+
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        mhospitalTextView.setText("Here are the hospitals near:" + location);
+       mHospitalTextView.setText("Here are the hospitals near:" + location);
 
 
 
