@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
     private Button mFindHospitalButton;
     private EditText mLocationEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         mLocationEditText = (EditText) findViewById(R.id.locationEditText);
         mFindHospitalButton = (Button) findViewById(R.id.findHospitalButton);
-       mFindHospitalButton.setOnClickListener(new View.OnClickListener() {
+        mFindHospitalButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -31,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-//
-//    private class onClickListener implements View.OnClickListener {
-//    }
 }
+
+

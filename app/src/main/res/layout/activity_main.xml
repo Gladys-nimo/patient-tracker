@@ -13,6 +13,7 @@
         android:src="@drawable/patienttracker" />
 
     <TextView
+        android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,6 +35,7 @@
         android:textSize="20sp"
         android:textStyle="normal" />
 
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,9 +47,12 @@
         android:hint="Enter location"
         android:layout_centerHorizontal="true" />
 
+
+
     <Button
-        android:id="@+id/findHospitalButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/addPatientButton"
+        android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
