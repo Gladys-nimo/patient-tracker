@@ -10,22 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mFindHospitalButton;
-    private EditText mLocationEditText;
-    private TextView mAppNameTextView;
-
+    @BindView(R.id.findHospitalButton) Button mFindHospitalButton;
+    @BindView(R.id.locationEditText) EditText mLocationEditText;
+    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-        mFindHospitalButton = (Button) findViewById(R.id.findHospitalButton);
-        mAppNameTextView = (TextView) findViewById(R.id.appNameTextView);
+        ButterKnife.bind(this);
 
         mFindHospitalButton.setOnClickListener(new View.OnClickListener() {
 
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String location = mLocationEditText.getText().toString();
                 Intent intent = new Intent(MainActivity.this, HospitalActivity.class);
+
                 intent.putExtra("location", location);
                 startActivity(intent);
             }
