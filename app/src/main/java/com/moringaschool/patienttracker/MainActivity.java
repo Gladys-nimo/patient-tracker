@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.findHospitalButton) Button mFindHospitalButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
@@ -26,18 +26,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mFindHospitalButton.setOnClickListener(new View.OnClickListener() {
+        mFindHospitalButton.setOnClickListener(this);
+        }
 
             @Override
             public void onClick(View v) {
-                String location = mLocationEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, HospitalActivity.class);
+                if (v == mFindHospitalButton) {
+                    String location = mLocationEditText.getText().toString();
+                    Intent intent = new Intent(MainActivity.this, HospitalActivity.class);
 
-                intent.putExtra("location", location);
-                startActivity(intent);
+                    intent.putExtra("location", location);
+                    startActivity(intent);
+                }
             }
-        });
-    }
 }
 
 

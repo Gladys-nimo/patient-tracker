@@ -18,9 +18,9 @@ public class MyHospitalsArrayAdapter extends ArrayAdapter {
 
     @Override
     public Object getItem(int position) {
-        String hospital = mHospitals[position];
-        String location = mLocations[position];
-        return String.format("%s \nTreats very well: %s", hospital, location);
+      String hospital = mHospitals[position];
+      String location = mLocations[position];
+       return String.format("%s \nTreats very well: %s", hospital, location);
     }
 
     @Override

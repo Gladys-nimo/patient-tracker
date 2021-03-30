@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
     ,"Bliss Medical Center", "MediHeal Group of hospitals", "SavannahHealthCare","Getrude", "Agakhan",
             "Kenyatta", "Nairobi women's", "Nairobi west", "caren hospital","Bristol Park", "Balozi hopsital", "WentWorth","Neema","PlainsView","St Mary Health"};
 
-    private String [] locations = new String[]{"WestLands","UpperHill","NgongRoad","Embakasi", "Thika Highway"};
+    private String [] locations = new String[]{"WestLands","UpperHill","NgongRoad","Embakasi", "Thika Highway","nakuru","Nyeri","Mombasa","Umoja","Roysambu"};
 
 
     @Override
@@ -40,11 +40,11 @@ import butterknife.ButterKnife;
         mListView.setAdapter(adapter);
 
        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
+         @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-               String hospital = ((TextView)view).getText().toString();
-               Toast.makeText(HospitalActivity.this, hospital, Toast.LENGTH_SHORT).show();
-           }
+             String hospital = ((TextView)view).getText().toString();
+             Toast.makeText(HospitalActivity.this, hospital, Toast.LENGTH_LONG).show();
+         }
        });
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
