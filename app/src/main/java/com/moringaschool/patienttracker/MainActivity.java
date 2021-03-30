@@ -8,32 +8,37 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private Button mFindHospitalButton;
-    private EditText mLocationEditText;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    @BindView(R.id.findHospitalButton) Button mFindHospitalButton;
+    @BindView(R.id.locationEditText) EditText mLocationEditText;
+    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-        mFindHospitalButton = (Button) findViewById(R.id.findHospitalButton);
-        mFindHospitalButton.setOnClickListener(new View.OnClickListener() {
+        mFindHospitalButton.setOnClickListener(this);
+        }
 
             @Override
             public void onClick(View v) {
-                String location = mLocationEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, HospitalActivity.class);
-                intent.putExtra("location", location);
-                startActivity(intent);
+                if (v == mFindHospitalButton) {
+                    String location = mLocationEditText.getText().toString();
+                    Intent intent = new Intent(MainActivity.this, HospitalActivity.class);
+
+                    intent.putExtra("location", location);
+                    startActivity(intent);
+                }
             }
-        });
-    }
 }
 
 
