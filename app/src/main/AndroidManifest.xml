@@ -9,13 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PatientTracker">
+<<<<<<< HEAD
         <activity android:name=".HospitalActivity">
+=======
+        <activity android:name=".PatientActivity">
+>>>>>>> week1
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.moringaschool.patienttracker.MainActivity">
             </meta-data>
         </activity>
+<<<<<<< HEAD
 
+=======
+        <activity android:name=".HospitalActivity">
+        </activity>
+>>>>>>> week1
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
