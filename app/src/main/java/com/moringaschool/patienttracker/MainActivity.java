@@ -9,14 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-<<<<<<< HEAD
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-=======
 public class MainActivity extends AppCompatActivity {
 
    @BindView(R.id.button) Button submit;
@@ -25,11 +23,7 @@ public class MainActivity extends AppCompatActivity {
    @BindView(R.id.editText3) EditText email;
    @BindView(R.id.editText4) EditText date;
    @BindView(R.id.editText5) EditText contact;
->>>>>>> week1
 
-    @BindView(R.id.findHospitalButton) Button mFindHospitalButton;
-    @BindView(R.id.locationEditText) EditText mLocationEditText;
-    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,32 +31,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mFindHospitalButton.setOnClickListener(this);
+        submit.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v){
+
+
+            if (name.getText().toString().isEmpty() || location.getText().toString().isEmpty() || email.getText().toString().isEmpty() || date.getText().toString().isEmpty()
+                    || contact.getText().toString().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Enter the Data", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Name -  " + name.getText().toString() + " \n" + "Password -  " + location.getText().toString()
+                        + " \n" + "E-Mail -  " + email.getText().toString() + " \n" + "Date -  " + date.getText().toString()
+                        + " \n" + "Contact -  " + contact.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+            Intent intent = new Intent(MainActivity.this, PatientActivity.class);
+            startActivity(intent);
+
+
         }
 
-            @Override
-            public void onClick(View v) {
-<<<<<<< HEAD
-                if (v == mFindHospitalButton) {
-                    String location = mLocationEditText.getText().toString();
-                    Intent intent = new Intent(MainActivity.this, HospitalActivity.class);
-
-                    intent.putExtra("location", location);
-                    startActivity(intent);
-                }
-=======
-                if (name.getText().toString().isEmpty() || location.getText().toString().isEmpty() || email.getText().toString().isEmpty() || date.getText().toString().isEmpty()
-                        || contact.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Enter the Data", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Name -  " + name.getText().toString() + " \n" + "Password -  " + location.getText().toString()
-                            + " \n" + "E-Mail -  " + email.getText().toString() + " \n" + "Date -  " + date.getText().toString()
-                            + " \n" + "Contact -  " + contact.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-                Intent intent = new Intent(MainActivity.this, PatientActivity.class);
-                startActivity(intent);
->>>>>>> week1
-            }
-}
-
-
+    }

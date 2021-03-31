@@ -42,23 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 <<<<<<< HEAD
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="134dp"
-        android:text="Here are some of the towns covered:"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="normal" />
-=======
-        android:layout_below="@+id/editText1"
-        android:layout_alignStart="@+id/editText1"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="34dp"
-        android:ems="10"
-        android:hint="location"
-        android:inputType="text" />
->>>>>>> week1
 
 
 

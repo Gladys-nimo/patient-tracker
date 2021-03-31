@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PatientTracker">
 <<<<<<< HEAD
-        <activity android:name=".HospitalActivity">
-=======
+        =======
         <activity android:name=".PatientActivity">
 >>>>>>> week1
             <meta-data
