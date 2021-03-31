@@ -39,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         submit.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
 
                 if (name.getText().toString().isEmpty() || location.getText().toString().isEmpty() || email.getText().toString().isEmpty() || date.getText().toString().isEmpty()
                         || contact.getText().toString().isEmpty()) {
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                             + " \n" + "Contact -  " + contact.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(MainActivity.this, PatientActivity.class);
+                startActivity(intent);
             }
         });
     }
