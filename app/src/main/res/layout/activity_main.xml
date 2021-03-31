@@ -65,8 +65,8 @@
         android:layout_marginLeft="7dp"
         android:layout_marginTop="34dp"
         android:ems="10"
-        android:hint="password"
-        android:inputType="numberPassword" />
+        android:hint="location"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/editText3"
