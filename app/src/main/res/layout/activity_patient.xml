@@ -2,22 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-<<<<<<< HEAD
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Patients condition"
-        android:id="@+id/condition"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint=""
-        android:inputType="text"
-        android:id="@+id/userNameEditText" />
-=======
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -27,7 +11,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="-15dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/hospital" />
+       android:src="@drawable/hospital" />
 
     <TextView
         android:layout_width="match_parent"
@@ -109,6 +93,6 @@
 
 </LinearLayout>
 
->>>>>>> week1
+
 
 </RelativeLayout>
