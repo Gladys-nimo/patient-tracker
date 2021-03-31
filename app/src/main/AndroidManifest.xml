@@ -11,10 +11,11 @@
         android:theme="@style/Theme.PatientTracker">
         <activity android:name=".PatientActivity">
 
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.moringaschool.patienttracker.MainActivity"></meta-data>
-            </activity>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.moringaschool.patienttracker.MainActivity"></meta-data>
+        </activity>
+
 
 
 
