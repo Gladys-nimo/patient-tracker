@@ -2,6 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> master
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -11,7 +16,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="-15dp"
         android:scaleType="centerCrop"
+<<<<<<< HEAD
+        android:src="@drawable/hospital" />
+=======
        android:src="@drawable/hospital" />
+>>>>>>> master
 
     <TextView
         android:layout_width="match_parent"
@@ -52,29 +61,29 @@
                 android:hint="describe"
                 android:inputType="text" />
 
-        <RadioButton
-            android:id="@+id/checkups"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:checked="false"
-            android:text="Visit"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/checkups"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:text="Visit"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <RadioButton
-            android:id="@+id/switching"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:checked="false"
-            android:text="switch practice"
-            android:textColor="#154"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/switching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:text="switch practice"
+                android:textColor="#154"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </RadioGroup>
 
         <Button
@@ -91,8 +100,11 @@
             android:textStyle="bold" />
 
 
-</LinearLayout>
+    </LinearLayout>
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 
 </RelativeLayout>
