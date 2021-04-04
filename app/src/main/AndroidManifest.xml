@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PatientTracker">
-        <activity android:name=".PatientActivity">
+        <activity android:name=".ClinicActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
