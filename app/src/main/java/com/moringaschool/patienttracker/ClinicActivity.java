@@ -22,20 +22,20 @@ public class ClinicActivity extends AppCompatActivity {
             "Slappy Cakes", "Equinox", "Miss Delta's", "Andina",
             "Lardo", "Portland City Grill", "Fat Head's Brewery",
             "Chipotle", "Subway"};
-    private TextView mLocationTextView;
-    private ListView mListView;
+    private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fishs Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican" };
+
+   @BindView(R.id.locationTextView) TextView mLocationTextView;
+    @BindView(R.id.listView) ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic);
+        ButterKnife.bind(this);
 
-        mLocationTextView = (TextView) findViewById(R.id.locationTextView);
-        mListView = (ListView) findViewById(R.id.listView);
-
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,clinics);
+        MyClinicsArrayAdapter adapter = new MyClinicsArrayAdapter(this, android.R.layout.simple_list_item_1,clinics, cuisines);
         mListView.setAdapter(adapter);
+
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
         mLocationTextView.setText("Here are all the clinics near: " + location);

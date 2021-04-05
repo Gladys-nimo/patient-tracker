@@ -7,20 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
-    private Button mFindClinicButton;
-    private EditText mLocationEditText;
+    @BindView(R.id.findClinicButton) Button mFindClinicButton;
+    @BindView(R.id.locationEditText) EditText mLocationEditText;
+    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-        mFindClinicButton = (Button) findViewById(R.id.findClinicButton);
+        ButterKnife.bind(this);
+
+
         mFindClinicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
