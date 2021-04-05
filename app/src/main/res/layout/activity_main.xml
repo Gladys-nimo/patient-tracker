@@ -7,157 +7,48 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="415dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:layout_height="789dp"
         android:layout_alignParentEnd="true"
-<<<<<<< HEAD
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="-15dp"
+        android:layout_marginEnd="0dp"
+        android:background="#FFFFFF"
         android:scaleType="centerCrop"
         android:src="@drawable/hospital" />
-=======
-        android:layout_marginStart="-15dp"
-        android:layout_marginEnd="11dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/hospital" />
-
->>>>>>> master
     <TextView
-        android:id="@+id/NameTextView"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="-4dp"
-        android:fontFamily="@font/berkshire_swash"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:background="@color/blue_200"
+        android:fontFamily="monospace"
         android:text="PatientTracker"
         android:textColor="@color/black"
         android:textSize="40sp"
-        android:textStyle="bold" />
-
-<<<<<<< HEAD
-=======
-    <TextView
-        android:layout_width="226dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginBottom="112dp"
-        android:textSize="20sp"
-        android:text="kindly register with us"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
-
->>>>>>> master
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-<<<<<<< HEAD
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="91dp"
-=======
-        android:layout_marginStart="86dp"
-        android:layout_marginLeft="86dp"
-        android:layout_marginTop="130dp"
->>>>>>> master
-        android:ems="10"
-        android:hint="name"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="true" />
+        android:textStyle="bold"
+        android:id="@+id/appNameTextView"/>
 
     <EditText
-        android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
-        android:layout_alignStart="@+id/editText1"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="96dp"
-        android:ems="10"
-        android:hint="location"
-<<<<<<< HEAD
-        android:inputType="text" />
-=======
-        android:inputType="textPersonName" />
->>>>>>> master
-
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_marginStart="-3dp"
-        android:layout_marginLeft="-3dp"
-<<<<<<< HEAD
-        android:layout_marginTop="94dp"
-=======
-        android:layout_marginTop="27dp"
->>>>>>> master
-        android:ems="10"
-        android:hint="email"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
-        android:layout_alignLeft="@+id/editText3"
-<<<<<<< HEAD
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="87dp"
-=======
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="43dp"
->>>>>>> master
-        android:ems="10"
-        android:hint="date"
-        android:inputType="date" />
-
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText4"
-        android:layout_alignStart="@+id/editText4"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="69dp"
-        android:ems="10"
-        android:hint="phone"
-        android:inputType="phone" />
+        android:id="@+id/locationEditText"
+        android:background="@color/colorTextIcon"
+        android:layout_above="@+id/findClinicButton"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:hint="Enter Location"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/button"
-        style="@android:style/Widget.Button"
-        android:layout_width="310dp"
+        android:id="@+id/findClinicButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText5"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="10dp"
-        android:text="submit"
-        android:textSize="16sp"
-        android:textStyle="normal|bold" />
-<<<<<<< HEAD
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/blue_200"
+        android:text="Find Clinic"
+        android:textColor="@color/black"/>
 
-=======
->>>>>>> master
 
 </RelativeLayout>
