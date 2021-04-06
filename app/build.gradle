@@ -6,6 +6,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'HEALTH_TAP_API_KEY', HealthTapApiKey
+    }
     defaultConfig {
         applicationId "com.moringaschool.patienttracker"
         minSdkVersion 21
@@ -39,7 +44,7 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-//    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-//    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
 }
