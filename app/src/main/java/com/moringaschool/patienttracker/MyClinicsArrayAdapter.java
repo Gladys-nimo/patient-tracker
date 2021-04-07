@@ -6,23 +6,23 @@ import android.widget.ArrayAdapter;
 public class MyClinicsArrayAdapter extends ArrayAdapter {
     private Context mContext;
     private String[] mClinics;
-    private String[] mCuisines;
+    private String[] mTypes;
 
-    public MyClinicsArrayAdapter(Context mContext, int resource, String[] mRestaurants, String[] mCuisines) {
+    public MyClinicsArrayAdapter(Context mContext, int resource, String[] mClinics, String[] mTypes) {
         super(mContext, resource);
         this.mContext = mContext;
-        this.mClinics = mRestaurants;
-        this.mCuisines = mCuisines;
+        this.mClinics = mClinics;
+        this.mTypes = mTypes;
     }
     @Override
     public Object getItem(int position) {
         String clinic = mClinics[position];
-        String cuisine = mCuisines[position];
-        return String.format("%s \nServes great: %s", clinic, cuisine);
+        String type = mTypes[position];
+        return String.format("%s \nOffers great service: %s", clinic, type);
     }
 
-    @Override
-    public int getCount() {
-        return mClinics.length;
-    }
+//    @Override
+//    public int getCount() {
+//        return mClinics.length;
+//    }
 }
