@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.patienttracker.R;
 import com.moringaschool.patienttracker.models.Business;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -28,11 +29,11 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
         mClinics = clinics;
     }
 
-    @NonNull
+
     @Override
-    public ClinicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ClinicListAdapter.ClinicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clinic_list_item, parent, false);
-        ClinicViewHolder viewHolder = new ClinicViewHolder(view);
+      ClinicViewHolder viewHolder = new ClinicViewHolder(view);
         return viewHolder;
     }
 
@@ -47,7 +48,7 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
     }
 
     public class ClinicViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.clinicImageView) ImageView mRestaurantImageView;
+        @BindView(R.id.clinicImageView) ImageView mClinicImageView;
         @BindView(R.id.clinicNameTextView) TextView mNameTextView;
         @BindView(R.id.categoryTextView) TextView mCategoryTextView;
         @BindView(R.id.ratingTextView) TextView mRatingTextView;
@@ -61,6 +62,7 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
         }
 
         public void bindClinic(Business clinic) {
+//            Picasso.get().load(clinic.getImageUrl()).into(mClinicImageView);
             mNameTextView.setText(clinic.getName());
             mCategoryTextView.setText(clinic.getCategories().get(0).getTitle());
             mRatingTextView.setText("Rating: " +clinic.getRating() + "/5");

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.findClinicButton) Button mFindClinicButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
+    @BindView(R.id.toolbar) Toolbar mToolBar;
 
 
     @Override
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String location = mLocationEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, ClinicActivity.class);
+                Intent intent = new Intent(MainActivity.this, ClinicListActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
             }
