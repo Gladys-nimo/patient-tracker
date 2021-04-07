@@ -1,6 +1,7 @@
 package com.moringaschool.patienttracker;
 
 public class Constants {
-    public static final String HEALTH_TAP_BASE_URL = "https://developers.healthtap.com/api/v2.1/";
-    public static final String HEALTH_TAP_API_KEY = BuildConfig.HEALTH_TAP_API_KEY;
+    public static final String YELP_BASE_URL = "https://api.yelp.com/v3/";
+    public static final String YELP_API_KEY = BuildConfig.YELP_API_KEY;
+
 }
