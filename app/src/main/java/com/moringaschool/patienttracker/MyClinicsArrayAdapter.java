@@ -21,8 +21,8 @@ public class MyClinicsArrayAdapter extends ArrayAdapter {
         return String.format("%s \nOffers great service: %s", clinic, type);
     }
 
-//    @Override
-//    public int getCount() {
-//        return mClinics.length;
-//    }
+    @Override
+    public int getCount() {
+        return mClinics.length;
+    }
 }
