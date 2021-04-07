@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +20,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class ClinicActivity extends AppCompatActivity {
@@ -51,5 +54,38 @@ public class ClinicActivity extends AppCompatActivity {
         String location = intent.getStringExtra("location");
         mLocationTextView.setText("Here are all the clinics near: " + location);
 
+        HealthTapApi client = HealthTapClient.getClient();
+        Call<HealthTapClinicResponse> call = client.getName(name, " 6b1423a9d0fc6815d2e258a66ae97bf7baba5e2480405af6a87d2ea1daa0a755");
+//        Call<List<Attributes>> call = HealthTapApi.getName();
+        call.enqueue(new Callback<HealthTapClinicResponse>() {
+            @Override
+            public void onResponse(Call<HealthTapClinicResponse> call, Response<HealthTapClinicResponse> response) {
+                if(response.isSuccessful()){
+                    mLocationTextView.setText("code: " + response.code());
+                    return;
+                }
+                List<Attributes> attributes = (List<Attributes>) response.body();
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<HealthTapClinicResponse> call, Throwable t) {
+            mLocationTextView.setText(t.getMessage());
+
+            }
+
+
+
+
+
+
+        });
+
     }
+
+
+
 }
