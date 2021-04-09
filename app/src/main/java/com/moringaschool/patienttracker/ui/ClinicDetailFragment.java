@@ -2,14 +2,27 @@ package com.moringaschool.patienttracker.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.moringaschool.patienttracker.R;
 import com.moringaschool.patienttracker.models.Business;
+import com.moringaschool.patienttracker.models.Category;
+import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,48 +30,58 @@ import com.moringaschool.patienttracker.models.Business;
  * create an instance of this fragment.
  */
 public class ClinicDetailFragment extends Fragment {
-//
-//    TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    @BindView(R.id.clinicImageView) ImageView mImageLabel;
+    @BindView(R.id.clinicNameTextView) TextView mNameLabel;
+    @BindView(R.id.cuisineTextView) TextView mCategoriesLabel;
+    @BindView(R.id.ratingTextView) TextView mRatingLabel;
+    @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
+    @BindView(R.id.phoneTextView) TextView mPhoneLabel;
+    @BindView(R.id.addressTextView) TextView mAddressLabel;
+    @BindView(R.id.saveClinicButton) TextView mSaveClinicButton;
 
+    private Business mClinic;
     public ClinicDetailFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
 
-     */
-    // TODO: Rename and change types and number of parameters
     public static ClinicDetailFragment newInstance(Business clinic) {
-        ClinicDetailFragment fragment = new ClinicDetailFragment();
+       ClinicDetailFragment clinicDetailFragment = new ClinicDetailFragment();
         Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
+        args.putParcelable("restaurant", Parcels.wrap(clinic));
+        clinicDetailFragment.setArguments(args);
+        return clinicDetailFragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        assert getArguments() != null;
+        mClinic = Parcels.unwrap(getArguments().getParcelable("clinic"));
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_clinic_detail, container, false);
+
+        View view =  inflater.inflate(R.layout.fragment_clinic_detail, container, false);
+        ButterKnife.bind(this, view);
+        Picasso.get().load(mClinic.getImageUrl()).into(mImageLabel);
+
+        List<String> categories = new ArrayList<>();
+
+        for (Category category: mClinic.getCategories()) {
+            categories.add(category.getTitle());
+        }
+
+        mNameLabel.setText(mClinic.getName());
+        mCategoriesLabel.setText(android.text.TextUtils.join(", ", categories));
+        mRatingLabel.setText(Double.toString(mClinic.getRating()) + "/5");
+        mPhoneLabel.setText(mClinic.getPhone());
+        mAddressLabel.setText(mClinic.getLocation().toString());
+
+        return view;
     }
 }
