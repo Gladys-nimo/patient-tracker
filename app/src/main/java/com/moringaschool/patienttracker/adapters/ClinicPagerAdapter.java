@@ -8,18 +8,19 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.moringaschool.patienttracker.models.Business;
 import com.moringaschool.patienttracker.ui.ClinicDetailFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ClinicPageAdapter extends FragmentPagerAdapter {
-    private List<Business> mClinics;
+public class ClinicPagerAdapter extends FragmentPagerAdapter {
+    private List<Business> mClinics = new ArrayList<>();
 
 
-    public ClinicPageAdapter(@NonNull FragmentManager fragmentManager, int behavior, List<Business> clinics) {
+    public ClinicPagerAdapter(@NonNull FragmentManager fragmentManager, int behavior, List<Business> clinics) {
         super(fragmentManager, behavior);
         mClinics = clinics;
     }
 
-    @NonNull
+
     @Override
     public Fragment getItem(int position) {
         return ClinicDetailFragment.newInstance(mClinics.get(position));

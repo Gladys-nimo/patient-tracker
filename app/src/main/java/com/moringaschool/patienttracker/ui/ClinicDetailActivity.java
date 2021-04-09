@@ -7,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.moringaschool.patienttracker.R;
-import com.moringaschool.patienttracker.adapters.ClinicPageAdapter;
+import com.moringaschool.patienttracker.adapters.ClinicPagerAdapter;
 import com.moringaschool.patienttracker.models.Business;
 
 import org.parceler.Parcels;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 
 public class ClinicDetailActivity extends AppCompatActivity {
     @BindView(R.id.viewPager) ViewPager mViewPager;
-    private ClinicPageAdapter adapterViewPager;
+    private ClinicPagerAdapter adapterViewPager;
     List<Business> mClinics;
 
     @Override
@@ -32,7 +32,7 @@ public class ClinicDetailActivity extends AppCompatActivity {
         mClinics = Parcels.unwrap(getIntent().getParcelableExtra("clinics"));
         int startingPosition = getIntent().getIntExtra("position", 0);
 
-        adapterViewPager = new ClinicPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mClinics);
+        adapterViewPager = new ClinicPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mClinics);
         mViewPager.setAdapter(adapterViewPager);
         mViewPager.setCurrentItem(startingPosition);
     }

@@ -6,7 +6,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.moringaschool.patienttracker.models.Center;
 
+import org.parceler.Parcel;
+
 //@Generated("jsonschema2pojo")
+@Parcel
 public class Region {
 
     @SerializedName("center")

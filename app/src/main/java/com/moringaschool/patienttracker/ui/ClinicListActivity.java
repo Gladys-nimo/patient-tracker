@@ -50,7 +50,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
     mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-    Log.d("Shared Pref Location", mRecentAddress);
+//    Log.d("Shared Pref Location", mRecentAddress);
 
     Intent intent = getIntent();
     String location = intent.getStringExtra("location");

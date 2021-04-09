@@ -41,8 +41,13 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
         return viewHolder;
     }
 
+//    @Override
+//    public void onBindViewHolder(@NonNull ClinicViewHolder holder, int position) {
+//
+//    }
+
     @Override
-    public void onBindViewHolder(@NonNull ClinicViewHolder holder, int position) {
+    public void onBindViewHolder(ClinicListAdapter.ClinicViewHolder holder, int position) {
   holder.bindClinic(mClinics.get(position));
     }
 
@@ -70,7 +75,7 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
 //            Picasso.get().load(clinic.getImageUrl()).into(mClinicImageView);
             mNameTextView.setText(clinic.getName());
             mCategoryTextView.setText(clinic.getCategories().get(0).getTitle());
-            mRatingTextView.setText("Rating: " +clinic.getRating() + "/5");
+            mRatingTextView.setText("Rating: " + clinic.getRating() + "/5");
         }
 
         @Override
