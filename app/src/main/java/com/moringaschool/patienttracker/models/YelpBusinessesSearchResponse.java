@@ -8,7 +8,10 @@ import com.google.gson.annotations.SerializedName;
 import com.moringaschool.patienttracker.models.Business;
 import com.moringaschool.patienttracker.models.Region;
 
+import org.parceler.Parcel;
+
 //@Generated("jsonschema2pojo")
+@Parcel
 public class YelpBusinessesSearchResponse {
 
     @SerializedName("total")

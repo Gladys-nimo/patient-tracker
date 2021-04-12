@@ -11,7 +11,8 @@ import org.parceler.Parcel;
 //@Generated("jsonschema2pojo")
 
 @Parcel
-public class Business {
+public class
+Business {
 
     @SerializedName("rating")
     @Expose
