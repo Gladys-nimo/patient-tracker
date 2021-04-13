@@ -30,34 +30,50 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-        private DatabaseReference mSearchedLocationReference;
-    public static final String TAG = MainActivity.class.getSimpleName();
-//    private FirebaseAuth mAuth;
-//    private FirebaseAuth.AuthStateListener mAuthListener;
-    @BindView(R.id.findClinicButton) Button mFindClinicButton;
+//
+    @BindView(R.id.findClinicsButton) Button mFindClinicsButton;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
-    @BindView(R.id.locationEditText)
-    EditText mLocationEditText;
-//    @BindView(R.id.toolbar) Toolbar mToolBar;
-//    @BindView(R.id.savedClinicButton) Button mSavedClinicButton;
+    @BindView(R.id.savedClinicsButton) Button mSavedClinicsButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mSearchedLocationReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        mFindClinicsButton.setOnClickListener(this);
+        mSavedClinicsButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mFindClinicsButton) {
+            Intent intent = new Intent(MainActivity.this, ClinicListActivity.class);
+            startActivity(intent);
+        }
+        if (v == mSavedClinicsButton) {
+            Intent intent = new Intent(MainActivity.this, SavedClinicListActivity.class);
+            startActivity(intent);
+        }
+    }
+
+}
+//            intent.putExtra("location", location);
+
+//        mSearchedLocationReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference()
+//                .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
 
 
 //
 //       mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 //    mEditor = mSharedPreferences.edit();
 
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+//            String location = mLocationEditText.getText().toString();
 
 //       mSearchedLocationReference.addValueEventListener(new ValueEventListener() { //attach listener
 //           @Override
@@ -68,7 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                }
 //            }
 
-
+//        private DatabaseReference mSearchedLocationReference;
+//    public static final String TAG = MainActivity.class.getSimpleName();
+////    private FirebaseAuth mAuth;
+////    private FirebaseAuth.AuthStateListener mAuthListener;
 
 //        mAuth = FirebaseAuth.getInstance();
 //        mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -87,28 +106,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        };
 
-        mFindClinicButton.setOnClickListener(this);
-//        mSavedClinicButton.setOnClickListener(this);
-    }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) { //update UI here if error occurred.
+//
+//            }
+//        });
 
-    @Override
-    public void onClick(View v) {
-        if (v == mFindClinicButton) {
-            String location = mLocationEditText.getText().toString();
+//            saveLocationToFireBase(location);
 
-            saveLocationToFireBase(location);
-            Intent intent = new Intent(MainActivity.this, ClinicListActivity.class);
-            intent.putExtra("location", location);
-            startActivity(intent);
-        }
-//        if (v == mSavedClinicButton) {
-//            Intent intent = new Intent(MainActivity.this, SavedClinicListActivity.class);
-//            startActivity(intent);
-//        }
-    }
-    public void saveLocationToFireBase(String location) {
-        mSearchedLocationReference.setValue(location);
-    }
+
+
+
+
+
+
+
+//            if(!(location).equals("")) {
+//                addToSharedPreferences(location);
+//            }
+
+//
+//            public void saveLocationToFirebase(String location) {
+//                mSearchedLocationReference.push().setValue(location);
+//    }
+
+
+
+//
+
+///    public void saveLocationToFireBase(String location) {
+//        mSearchedLocationReference.setValue(location);
+//    }
 
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item){
@@ -148,39 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //        }
 //    }
-}
-
-
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) { //update UI here if error occurred.
-//
-//            }
-//        });
-
-
-
-
-
-
-
-
-
-
-//            if(!(location).equals("")) {
-//                addToSharedPreferences(location);
-//            }
-
-//
-//            public void saveLocationToFirebase(String location) {
-//                mSearchedLocationReference.push().setValue(location);
-//    }
-
-
-
-//
-
-
 
 
 
