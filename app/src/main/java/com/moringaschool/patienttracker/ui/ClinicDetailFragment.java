@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.patienttracker.Constants;
@@ -33,9 +35,9 @@ import butterknife.ButterKnife;
 
 public class ClinicDetailFragment extends Fragment implements View.OnClickListener {
 
-        @BindView(R.id.clinicImageView) ImageView mImageLabel;
+    @BindView(R.id.clinicImageView) ImageView mImageLabel;
     @BindView(R.id.clinicNameTextView) TextView mNameLabel;
-        @BindView(R.id.clinicTypeTextView) TextView mCategoriesLabel;
+    @BindView(R.id.clinicTypeTextView) TextView mCategoriesLabel;
     @BindView(R.id.ratingTextView) TextView mRatingLabel;
     @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
     @BindView(R.id.phoneTextView) TextView mPhoneLabel;
@@ -79,7 +81,7 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
         for (Category category : mClinic.getCategories()) {
             categories.add(category.getTitle());
         }
-//      //
+
 
         mNameLabel.setText(mClinic.getName());
        mCategoriesLabel.setText(android.text.TextUtils.join(", ", categories));
@@ -114,10 +116,17 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
             startActivity(mapIntent);
         }
         if (v == mSaveClinicButton) {
-            DatabaseReference restaurantRef = FirebaseDatabase
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            DatabaseReference clinicRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_CLINICS);
-            restaurantRef.push().setValue(mClinic);
+                    .getReference(Constants.FIREBASE_CHILD_CLINICS)
+                    .child(uid);
+
+            DatabaseReference pushRef = clinicRef.push();
+            String pushId = pushRef.getKey();
+            mClinic.setPushId(pushId);
+            pushRef.setValue(mClinic);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }

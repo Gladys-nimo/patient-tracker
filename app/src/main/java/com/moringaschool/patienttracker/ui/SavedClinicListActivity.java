@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 
 public class SavedClinicListActivity extends AppCompatActivity {
     private DatabaseReference mClinicReference;
-    private FireBaseClinicListAdapter mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<Business, FirebaseClinicViewHolder> mFirebaseAdapter;
     private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -47,28 +47,33 @@ public class SavedClinicListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-
+            mClinicReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CLINICS);
             setUpFirebaseAdapter();
             hideProgressBar();
             showClinics();
         }
 
         private void setUpFirebaseAdapter () {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String uid = user.getUid();
-            mClinicReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CLINICS).child(uid);
             FirebaseRecyclerOptions<Business> options =
                     new FirebaseRecyclerOptions.Builder<Business>()
                             .setQuery(mClinicReference, Business.class)
                             .build();
-            mFirebaseAdapter = new FireBaseClinicListAdapter(options, mClinicReference, (OnStartDragListener) this, this);
 
+            mFirebaseAdapter = new FirebaseRecyclerAdapter<Business, FirebaseClinicViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull FirebaseClinicViewHolder firebaseClinicViewHolder, int position, @NonNull Business clinic) {
+                    firebaseClinicViewHolder.bindClinic(clinic);
+                }
+
+                @NonNull
+                @Override
+                public FirebaseClinicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clinic_list_item, parent, false);
+                    return new FirebaseClinicViewHolder(view);
+                }
+            };
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.setAdapter(mFirebaseAdapter);
-            mRecyclerView.setHasFixedSize(true);
-            ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
-            mItemTouchHelper = new ItemTouchHelper(callback);
-            mItemTouchHelper.attachToRecyclerView(mRecyclerView);
         }
 
 

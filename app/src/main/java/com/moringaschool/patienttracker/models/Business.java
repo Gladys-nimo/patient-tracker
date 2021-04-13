@@ -31,6 +31,7 @@ Business {
     private Location location;
     private Double distance;
     private List<String> transactions;
+    private String pushId;
 
     /**
      * No args constructor for use in serialization
@@ -192,6 +193,13 @@ Business {
 
     public void setTransactions(List<String> transactions) {
         this.transactions = transactions;
+    }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
 
