@@ -29,14 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //    private DatabaseReference mSearchedLocationReference;
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.findClinicButton)
-    Button mFindClinicButton;
+    @BindView(R.id.findClinicButton) Button mFindClinicButton;
     @BindView(R.id.appNameTextView)
     TextView mAppNameTextView;
     @BindView(R.id.toolbar)
     Toolbar mToolBar;
-    @BindView(R.id.saveClinicButton)
-    Button mSaveClinicButton;
+    @BindView(R.id.saveClinicButton) Button mSaveClinicButton;
 
 
     @Override

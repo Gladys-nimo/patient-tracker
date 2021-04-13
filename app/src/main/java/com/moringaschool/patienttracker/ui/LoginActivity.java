@@ -77,12 +77,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if (view == createAccountTextView) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        if (view == mRegisterTextView) {
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
             startActivity(intent);
             finish();
         }
-        if (view == loginButton) {
+        if (view == mPasswordLoginButton ) {
             logInWithPassWord();
             showLoadingState();
         }
@@ -115,8 +115,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         passwordEdit.setVisibility(View.GONE);
         emailEdit.setVisibility(View.GONE);
-        createAccountTextView.setVisibility(View.GONE);
-        loginButton.setVisibility(View.GONE);
+        mRegisterTextView.setVisibility(View.GONE);
+        mPasswordLoginButton.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -124,8 +124,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mProgressBar.setVisibility(View.GONE);
         passwordEdit.setVisibility(View.VISIBLE);
         emailEdit.setVisibility(View.VISIBLE);
-        createAccountTextView.setVisibility(View.VISIBLE);
-        loginButton.setVisibility(View.VISIBLE);
+       mRegisterTextView.setVisibility(View.VISIBLE);
+        mPasswordLoginButton.setVisibility(View.VISIBLE);
     }
 }
 
