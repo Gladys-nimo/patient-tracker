@@ -30,7 +30,8 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-//
+    private FirebaseAuth mAuth;
+   private FirebaseAuth.AuthStateListener mAuthListener;
     @BindView(R.id.findClinicsButton) Button mFindClinicsButton;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
     @BindView(R.id.savedClinicsButton) Button mSavedClinicsButton;
@@ -44,6 +45,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+//                  getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                    Log.d("database","show an error");
+
+                } else {
+
+                }
+            }
+        };
         mFindClinicsButton.setOnClickListener(this);
         mSavedClinicsButton.setOnClickListener(this);
     }
@@ -83,6 +100,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
 }
 //            intent.putExtra("location", location);
@@ -110,25 +140,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        private DatabaseReference mSearchedLocationReference;
 //    public static final String TAG = MainActivity.class.getSimpleName();
-////    private FirebaseAuth mAuth;
-////    private FirebaseAuth.AuthStateListener mAuthListener;
+////
 
-//        mAuth = FirebaseAuth.getInstance();
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
 //
-//
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user != null) {
-////                  getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
-//                    Log.d("database","show an error");
-//
-//                } else {
-//
-//                }
-//            }
-//        };
 
 //
 //            @Override

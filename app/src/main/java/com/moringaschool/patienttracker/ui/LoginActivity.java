@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -22,36 +23,31 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    @BindView(R.id.registerTextView)
-    TextView mRegisterTextView;
-    @BindView(R.id.passwordLoginButton)
-    Button mPasswordLoginButton;
+    public static final String TAG = LoginActivity.class.getSimpleName();
 
-    @BindView(R.id.emailEditText) TextView emailEdit;
-    @BindView(R.id.passwordEditText)
-    TextView passwordEdit;
+    @BindView(R.id.registerTextView) TextView mRegisterTextView;
+    @BindView(R.id.passwordLoginButton) Button mPasswordLoginButton;
+    @BindView(R.id.emailEditText) TextView mEmailEditText;
+    @BindView(R.id.passwordEditText) TextView mPasswordEditText;
+    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
+    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
-    @BindView(R.id.progressBar)
-    ProgressBar mProgressBar;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ButterKnife.bind(this);
+        mAuth = FirebaseAuth.getInstance();
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
 
-        mRegisterTextView.setOnClickListener(this);
-        mPasswordLoginButton.setOnClickListener(this);
-        firebaseAuth = FirebaseAuth.getInstance();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -59,73 +55,76 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
+
+        ButterKnife.bind(this);
+        mPasswordLoginButton.setOnClickListener(this);
+        mRegisterTextView.setOnClickListener(this);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (authStateListener != null) {
-            firebaseAuth.removeAuthStateListener(authStateListener);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
+    public void onClick(View view){
         if (view == mRegisterTextView) {
             Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
             startActivity(intent);
             finish();
         }
-        if (view == mPasswordLoginButton ) {
-            logInWithPassWord();
-            showLoadingState();
+
+        if (view == mPasswordLoginButton) {
+            loginWithPassword();
+            showProgressBar();
         }
     }
 
-    private void logInWithPassWord() {
-        String email = emailEdit.getText().toString().trim();
-        String password = passwordEdit.getText().toString().trim();
+    private void loginWithPassword() {
+        String email = mEmailEditText.getText().toString().trim();
+        String password = mPasswordEditText.getText().toString().trim();
         if (email.equals("")) {
-            emailEdit.setError("Please Enter Your Email");
+            mEmailEditText.setError("Please enter your email");
             return;
         }
         if (password.equals("")) {
-            passwordEdit.setError("Password Cannot be blank");
+            mPasswordEditText.setError("Password cannot be blank");
             return;
         }
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        hideLoadingState();
+                        hideProgressBar();
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Log.w(TAG, "signInWithEmail", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    private void showLoadingState() {
-
-        passwordEdit.setVisibility(View.GONE);
-        emailEdit.setVisibility(View.GONE);
-        mRegisterTextView.setVisibility(View.GONE);
-        mPasswordLoginButton.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void hideLoadingState() {
-        mProgressBar.setVisibility(View.GONE);
-        passwordEdit.setVisibility(View.VISIBLE);
-        emailEdit.setVisibility(View.VISIBLE);
-       mRegisterTextView.setVisibility(View.VISIBLE);
-        mPasswordLoginButton.setVisibility(View.VISIBLE);
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    private void showProgressBar() {
+        mSignInProgressBar.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setText("Log in you in");
+    }
+
+    private void hideProgressBar() {
+        mSignInProgressBar.setVisibility(View.GONE);
+        mLoadingSignUp.setVisibility(View.GONE);
     }
 }
 

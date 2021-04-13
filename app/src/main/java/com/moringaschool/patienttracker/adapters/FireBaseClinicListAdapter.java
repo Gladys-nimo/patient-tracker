@@ -2,6 +2,7 @@ package com.moringaschool.patienttracker.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,9 +14,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.moringaschool.patienttracker.R;
 import com.moringaschool.patienttracker.models.Business;
+import com.moringaschool.patienttracker.util.ItemTouchHelperAdapter;
 import com.moringaschool.patienttracker.util.OnStartDragListener;
 
-public class FireBaseClinicListAdapter extends FirebaseRecyclerAdapter<Business, FirebaseClinicViewHolder> implements ItemTouchHelper {
+public class FireBaseClinicListAdapter extends FirebaseRecyclerAdapter<Business, FirebaseClinicViewHolder> implements ItemTouchHelperAdapter {
     private DatabaseReference mRef;
     private OnStartDragListener mOnStartDragListener;
     private Context mContext;
@@ -33,7 +35,15 @@ public class FireBaseClinicListAdapter extends FirebaseRecyclerAdapter<Business,
     @Override
     protected void onBindViewHolder(@NonNull FirebaseClinicViewHolder firebaseClinicViewHolder, int position, @NonNull Business clinic) {
         firebaseClinicViewHolder.bindClinic(clinic);
-
+        firebaseClinicViewHolder.mClinicImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    mOnStartDragListener.onStartDrag(firebaseClinicViewHolder);
+                }
+                return false;
+            }
+        });
     }
 
     @NonNull

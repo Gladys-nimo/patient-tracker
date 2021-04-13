@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 
 public class SavedClinicListActivity extends AppCompatActivity {
     private DatabaseReference mClinicReference;
-    private FirebaseRecyclerAdapter<Business, FirebaseClinicViewHolder> mFirebaseAdapter;
+    private FireBaseClinicListAdapter mFirebaseAdapter;
     private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -47,7 +47,7 @@ public class SavedClinicListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-            mClinicReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CLINICS);
+
             setUpFirebaseAdapter();
             hideProgressBar();
             showClinics();

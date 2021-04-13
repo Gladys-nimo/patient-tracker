@@ -28,19 +28,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener{
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     public static final String TAG = CreateAccountActivity.class.getSimpleName();
-    @BindView(R.id.nameEditText) EditText nameEdit;
-    @BindView(R.id.emailEditText) EditText emailEdit;
-    @BindView(R.id.passwordEditText) EditText passwordEdit;
-    @BindView(R.id.confirmPasswordEditText) EditText confirmPasswordEdit;
-    @BindView(R.id.createUserButton) Button createUserButton;
-    @BindView(R.id.loginTextView) TextView loginTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.nameEditText) EditText mNameEditText;
+    @BindView(R.id.emailEditText) EditText mEmailEditText;
+    @BindView(R.id.passwordEditText) EditText mPasswordEditText;
+    @BindView(R.id.confirmPasswordEditText) EditText mConfirmPasswordEditText;
+    @BindView(R.id.createUserButton) Button mCreateUserButton;
+    @BindView(R.id.loginTextView) TextView mLoginTextView;
+    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
+    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private String name;
+
+    private String mName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,132 +49,127 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         ButterKnife.bind(this);
 
 
-        createUserButton.setOnClickListener(this);
-        loginTextView.setOnClickListener(this);
-        firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        mLoginTextView.setOnClickListener(this);
+        mCreateUserButton.setOnClickListener(this);
         createAuthStateListener();
     }
     @Override
-    public void onClick(
-            View view) {
-        if (view == loginTextView) {
+    public void onClick(View view) {
+        if (view == mLoginTextView) {
             Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
-        if (view == createUserButton) {
-            createUser();
+        if (view == mCreateUserButton) {
+            createNewUser();
         }
     }
-    private boolean confirmEmail(String email){
-        boolean isValidEmail = (email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-        if (!isValidEmail) {
-            emailEdit.setError("Please Enter a Valid Email Address");
-            return false;
-        }
-        return true;
-    }
-    private boolean confirmName(String name) {
-        if (name.equals("")) {
-            nameEdit.setError("Please Enter a Valid Name");
-            return false;
-        }
-        return true;
-    }
-    private boolean confirmPassword(String password, String confirmPassword){
-        if (password.length() < 6) {
-            passwordEdit.setError("Please Set Up a Password Containing At Least 6 Characters");
-            return false;
-        } else if (!password.equals(confirmPassword)) {
-            passwordEdit.setError("Passwords Do Not Match");
-            return false;
-        }
-        return true;
-    }
-    private void showLoadingState() {
+    private void createNewUser() {
+        final String name = mNameEditText.getText().toString().trim();
+        final String email = mEmailEditText.getText().toString().trim();
+        mName = mNameEditText.getText().toString().trim();
+        String password = mPasswordEditText.getText().toString().trim();
+        String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
 
-        nameEdit.setVisibility(View.GONE);
-        emailEdit.setVisibility(View.GONE);
-        passwordEdit.setVisibility(View.GONE);
-        confirmPasswordEdit.setVisibility(View.GONE);
-        createUserButton.setVisibility(View.GONE);
-        loginTextView.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
-//        createAccountImageView.setVisibility(View.GONE);
-    }
-    private void hideLoadingState() {
-        nameEdit.setVisibility(View.VISIBLE);
-        emailEdit.setVisibility(View.VISIBLE);
-        passwordEdit.setVisibility(View.VISIBLE);
-        confirmPasswordEdit.setVisibility(View.VISIBLE);
-        createUserButton.setVisibility(View.VISIBLE);
-        loginTextView.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
-    }
-    private void createUser() {
-        final String userName = nameEdit.getText().toString().trim();
-        final String userEmail = emailEdit.getText().toString().trim();
-        String password = passwordEdit.getText().toString().trim();
-        String confirmPassword = confirmPasswordEdit.getText().toString().trim();
-        name = nameEdit.getText().toString().trim();
-        boolean validEmail = confirmEmail(userEmail);
-        boolean validName = confirmName(userName);
-        boolean validPassword = confirmPassword(password, confirmPassword);
-        boolean validUserName = confirmName(name);
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(name);
+        boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validName || !validPassword) return;
-        showLoadingState();
-        firebaseAuth.createUserWithEmailAndPassword(userEmail, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        hideLoadingState();
-                        if (task.isSuccessful()) {
-                            Toast.makeText(CreateAccountActivity.this, "Account Creation Successful", Toast.LENGTH_LONG).show();
-                            createFireBaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
-                        } else {
-                            Toast.makeText(CreateAccountActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+        showProgressBar();
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()){
+
+                createFirebaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
+                Log.d(TAG, "Authentication successful");
+            }else {
+                Toast.makeText(CreateAccountActivity.this,"Authentication failed.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-    private void createAuthStateListener() {
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
-                    Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
+
+    private void createAuthStateListener(){
+        mAuthListener = firebaseAuth -> {
+            final FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null){
+                Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         };
     }
+
     @Override
-    protected void onStart() {
+    public void onStart(){
         super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
+        mAuth.addAuthStateListener(mAuthListener);
     }
+
     @Override
-    protected void onStop() {
+    public void onStop(){
         super.onStop();
-        if (authStateListener != null) {
-            firebaseAuth.removeAuthStateListener(authStateListener);
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-    private void createFireBaseUserProfile(final FirebaseUser firebaseUser) {
+
+    private boolean isValidEmail(String email) {
+        boolean isGoodEmail = (email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if(!isGoodEmail){
+            mEmailEditText.setError("Please enter a valid email address");
+            return false;
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isValidName(String name){
+        if(name.equals("")){
+            mNameEditText.setError("Please enter your name");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidPassword(String password, String confirmPassword){
+        if(password.length() < 6){
+            mPasswordEditText.setError("Please create a password containing at least 6 characters");
+            return false;
+        } else if (!password.equals(confirmPassword)){
+            mPasswordEditText.setError("Passwords do not match");
+            return false;
+        }
+        return true;
+    }
+
+    private void showProgressBar() {
+        mSignInProgressBar.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setText("Sign Up process in Progress");
+    }
+
+    private void hideProgressBar() {
+        mSignInProgressBar.setVisibility(View.GONE);
+        mLoadingSignUp.setVisibility(View.GONE);
+    }
+
+    private void createFirebaseUserProfile(final FirebaseUser user){
         UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
-                .setDisplayName(name)
+                .setDisplayName(mName)
                 .build();
-        firebaseUser.updateProfile(addProfileName)
+
+        user.updateProfile(addProfileName)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, Objects.requireNonNull(firebaseUser.getDisplayName()));
-                            Toast.makeText(CreateAccountActivity.this, "Display View Updated", Toast.LENGTH_SHORT).show();
+                        hideProgressBar();
+                        if(task.isSuccessful()){
+                            Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
+                            Toast.makeText(CreateAccountActivity.this, "The display name has ben set", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
