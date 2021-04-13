@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,22 +33,14 @@ import butterknife.ButterKnife;
 
 public class ClinicDetailFragment extends Fragment implements View.OnClickListener {
 
-//    @BindView(R.id.clinicImageView)
-//    ImageView mImageLabel;
-    @BindView(R.id.clinicNameTextView)
-    TextView mNameLabel;
-//    @BindView(R.id.cuisineTextView)
-//    TextView mCategoriesLabel;
-//    @BindView(R.id.ratingTextView)
-//    TextView mRatingLabel;
-    @BindView(R.id.websiteTextView)
-    TextView mWebsiteLabel;
-    @BindView(R.id.phoneTextView)
-    TextView mPhoneLabel;
-    @BindView(R.id.addressTextView)
-    TextView mAddressLabel;
-    @BindView(R.id.saveClinicButton)
-    TextView mSaveClinicButton;
+        @BindView(R.id.clinicImageView) ImageView mImageLabel;
+    @BindView(R.id.clinicNameTextView) TextView mNameLabel;
+        @BindView(R.id.clinicTypeTextView) TextView mCategoriesLabel;
+    @BindView(R.id.ratingTextView) TextView mRatingLabel;
+    @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
+    @BindView(R.id.phoneTextView) TextView mPhoneLabel;
+    @BindView(R.id.addressTextView) TextView mAddressLabel;
+    @BindView(R.id.saveClinicButton) TextView mSaveClinicButton;
 
     private Business mClinic;
 
@@ -78,6 +71,7 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
 
         View view = inflater.inflate(R.layout.fragment_clinic_detail, container, false);
         ButterKnife.bind(this, view);
+        Picasso.get().load(mClinic.getImageUrl()).into(mImageLabel);
 
 
         List<String> categories = new ArrayList<>();
@@ -88,9 +82,9 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
 //      //
 
         mNameLabel.setText(mClinic.getName());
-//        mCategoriesLabel.setText(android.text.TextUtils.join(", ", categories));
-//        mRatingLabel.setText(Double.toString(mClinic.getRating()) + "/5");
-        mPhoneLabel.setText(mClinic.getPhone());
+       mCategoriesLabel.setText(android.text.TextUtils.join(", ", categories));
+       mRatingLabel.setText(Double.toString(mClinic.getRating()) + "/5");
+      mPhoneLabel.setText(mClinic.getPhone());
         mAddressLabel.setText(mClinic.getLocation().toString());
 
         mWebsiteLabel.setOnClickListener(this);
@@ -108,8 +102,8 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
         if (v == mWebsiteLabel) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mClinic.getUrl()));
             startActivity(webIntent);
-        }
-        if (v == mPhoneLabel) {
+
+        }   if (v == mPhoneLabel) {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mClinic.getPhone()));
             startActivity(phoneIntent);
         }
@@ -120,12 +114,39 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
             startActivity(mapIntent);
         }
         if (v == mSaveClinicButton) {
-            DatabaseReference clinicRef = FirebaseDatabase
+            DatabaseReference restaurantRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_CLINICS);
-            clinicRef.push().setValue(mClinic);
+            restaurantRef.push().setValue(mClinic);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
-
         }
     }
-}
+    }
+
+
+//    @Override
+//    public void onClick(View v) {
+//        if (v == mWebsiteLabel) {
+//            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mClinic.getUrl()));
+//            startActivity(webIntent);
+//        }
+//        if (v == mPhoneLabel) {
+//            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mClinic.getPhone()));
+//            startActivity(phoneIntent);
+//        }
+//        if (v == mAddressLabel) {
+//            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + mClinic.getCoordinates().getLatitude()
+////                    + "," + mClinic.getCoordinates().getLongitude()
+//                    + "?q=(" + mClinic.getName() + ")"));
+//            startActivity(mapIntent);
+//        }
+//        if (v == mSavedClinicButton) {
+////            Log.d("saved clinics","show clinics saved");
+//           DatabaseReference clinicRef = FirebaseDatabase
+//                 .getInstance()
+//                  .getReference(Constants.FIREBASE_CHILD_CLINICS);
+//            clinicRef.push().setValue(mClinic);
+//            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+//
+//        }
+//    }

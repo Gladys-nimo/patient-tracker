@@ -41,11 +41,6 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
         return viewHolder;
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull ClinicViewHolder holder, int position) {
-//
-//    }
-
     @Override
     public void onBindViewHolder(ClinicListAdapter.ClinicViewHolder holder, int position) {
   holder.bindClinic(mClinics.get(position));
@@ -83,7 +78,7 @@ public class ClinicListAdapter extends RecyclerView.Adapter<ClinicListAdapter.Cl
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, ClinicDetailActivity.class);
             intent.putExtra("position", itemPosition);
-            intent.putExtra("restaurants", Parcels.wrap(mClinics));
+            intent.putExtra("clinics", Parcels.wrap(mClinics));
             mContext.startActivity(intent);
         }
         }

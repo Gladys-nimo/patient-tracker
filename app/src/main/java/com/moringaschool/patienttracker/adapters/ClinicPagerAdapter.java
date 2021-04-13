@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClinicPagerAdapter extends FragmentPagerAdapter {
-    private List<Business> mClinics = new ArrayList<>();
+    private List<Business> mClinics;
 
 
     public ClinicPagerAdapter(@NonNull FragmentManager fragmentManager, int behavior, List<Business> clinics) {

@@ -11,5 +11,6 @@ public interface YelpApi {
     Call<YelpBusinessesSearchResponse> getClinics(
             @Query("location") String location,
             @Query("term") String term
+//            @Query("limit") int limit
     );
 }

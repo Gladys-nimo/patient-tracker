@@ -35,69 +35,63 @@ import retrofit2.Response;
 
 
 public class ClinicListActivity extends AppCompatActivity {
+//    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences.Editor mEditor;
+//    private String mRecentAddress;
+
 
     private static final String TAG = ClinicListActivity.class.getSimpleName();
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private String mRecentAddress;
     private ClinicListAdapter mAdapter;
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-
-public List<Business> clinics;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.errorTextView)
+    TextView mErrorTextView;
+    public List<Business> clinics;
 
 
     protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_clinic);
-    ButterKnife.bind(this);
-//    Log.d("Shared Pref Location", mRecentAddress);
-    mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-    if(mRecentAddress != null) {
-        fetchClinics(mRecentAddress);
-
-    }
-
-}
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_clinic);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
 
 
+            Intent intent = getIntent();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String location) {
-                addToSharedPreferences(location);
-                fetchClinics(location);
+            String location = intent.getStringExtra("location");
 
-                return false;
-            }
+            YelpApi client = YelpClient.getClient();
+            Call<YelpBusinessesSearchResponse> call = client.getClinics(location, "clinics");
+            call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
+                @Override
+                public void onResponse(Call<YelpBusinessesSearchResponse> call, Response<YelpBusinessesSearchResponse> response) {
 
-            @Override
-            public boolean onQueryTextChange(String location) {
-                return false;
-            }
-        });
+                    hideProgressBar();
+                    if (response.isSuccessful()) {
+                        clinics = response.body().getBusinesses();
+                        mAdapter = new ClinicListAdapter(ClinicListActivity.this, clinics);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ClinicListActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+                        hideProgressBar();
+                        showClinics();
+                    } else {
+                        showUnsuccessfulMessage();
+                    }
+                }
 
-        return true;
-    }
+                @Override
+                public void onFailure(Call<YelpBusinessesSearchResponse> call, Throwable t) {
+                    Log.e(TAG, "onFailure: ", t);
+                    hideProgressBar();
+                    showFailureMessage();
+                }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
+            });
+        }
 
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
@@ -116,41 +110,54 @@ public List<Business> clinics;
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-    }
-
-
-    private void fetchClinics(String location) {
-        YelpApi client = YelpClient.getClient();
-        Call<YelpBusinessesSearchResponse> call = client.getClinics(location, "clinics");
-        call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
-            @Override
-            public void onResponse(Call<YelpBusinessesSearchResponse> call, Response<YelpBusinessesSearchResponse> response) {
-
-                hideProgressBar();
-
-                if (response.isSuccessful()) {
-                    clinics = response.body().getBusinesses();
-                    mAdapter = new ClinicListAdapter(ClinicListActivity.this, clinics);
-                    mRecyclerView.setAdapter(mAdapter);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ClinicListActivity.this);
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
-
-                    showClinics();
-                } else {
-                    showUnsuccessfulMessage();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<YelpBusinessesSearchResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: ", t);
-                hideProgressBar();
-                showFailureMessage();
-            }
-
-        });
-    }
 }
+//    private void addToSharedPreferences(String location) {
+////        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+//    }
+
+//    private void fetchClinics(String location) {
+
+
+//            ButterKnife.bind(this);
+
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mEditor = mSharedPreferences.edit();
+
+//        MenuItem menuItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) menuItem.getActionView();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String location) {
+//                addToSharedPreferences(location);
+//                fetchClinics(location);
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String location) {
+//                return false;
+//            }
+//        });
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+//    }
+
+//    mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//    mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//    if(mRecentAddress != null) {
+//        fetchClinics(mRecentAddress);
+//
+//    }
+
+
+//        @Override
+//        public boolean onCreateOptionsMenu (Menu menu){
+//            MenuInflater inflater = getMenuInflater();
+//            inflater.inflate(R.menu.menu_search, menu);

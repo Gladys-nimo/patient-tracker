@@ -24,7 +24,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.moringaschool.patienttracker.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity" >
 
         </activity>
 
