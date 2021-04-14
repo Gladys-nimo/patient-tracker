@@ -20,10 +20,10 @@
         <activity android:name=".ui.CreateAccountActivity" />
         <activity android:name=".ui.SavedClinicListActivity" />
         <activity android:name=".ui.ClinicDetailActivity" />
-        <activity android:name=".ui.MainActivity" >
+        <activity android:name=".ui.MainActivity" android:theme="@style/AppTheme">
 
         </activity>
-        <activity android:name=".ui.ClinicListActivity">
+        <activity android:name=".ui.ClinicListActivity" android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.moringaschool.patienttracker.ui.MainActivity" />

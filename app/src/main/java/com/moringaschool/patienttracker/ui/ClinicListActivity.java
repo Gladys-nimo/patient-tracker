@@ -62,7 +62,6 @@ public class ClinicListActivity extends AppCompatActivity {
 
         }
     }
-
     @Override
         public boolean onCreateOptionsMenu (Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -80,10 +79,8 @@ public class ClinicListActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String location) {
                 addToSharedPreferences(location);
                 fetchClinics(location);
-
                 return false;
             }
-
 
             @Override
             public boolean onQueryTextChange(String location) {

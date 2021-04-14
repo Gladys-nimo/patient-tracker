@@ -45,7 +45,7 @@ public class FirebaseClinicViewHolder extends RecyclerView.ViewHolder implements
         TextView ratingTextView =  mView.findViewById(R.id.ratingTextView);
 
         nameTextView.setText(clinic.getName());
-        categoryTextView.setText(clinic.getCategories().get(0).getTitle());
+//        categoryTextView.setText(clinic.getCategories().get(0).getTitle());
         ratingTextView.setText("Rating: " + clinic.getRating() + "/5");
         Picasso.get().load(clinic.getImageUrl()).into(mClinicImageView);
 
@@ -56,8 +56,8 @@ public class FirebaseClinicViewHolder extends RecyclerView.ViewHolder implements
     public void onClick(View view) {
         final ArrayList<Business> clinics =  new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CLINICS).child(uid);
+//        String uid = user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CLINICS);
         ref.addListenerForSingleValueEvent(new ValueEventListener()  {
 
             @Override
