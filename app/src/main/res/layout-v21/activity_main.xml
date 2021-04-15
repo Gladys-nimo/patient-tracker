@@ -37,19 +37,20 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+
+            android:lineSpacingExtra="6sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif"
-            android:lineSpacingExtra="6sp"
-            android:paddingTop="10dp"
-            android:text="Patient tracker is an online Application. \n Aids its user to search for clinics.\n It displays clinics in a certain location.\n  \n It also shows you the best hospital to visit with the condition you are suffering from.\n this application will help many nations across Kenya and Africa as well."
+            android:text="Afri-Recipes is an online Application. \n Aids its user to search for recipes.\n It displays the source of the recipe.\n You can also find ingredient\n to your favourite recipes.If you don’t try any other online recipe organizer \n, you should at least try this one \n Aids its user to search for recipes.\n It displays the source of the recipe."
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal" />
+            android:textSize="18sp" />
+
 
 
     </androidx.cardview.widget.CardView>
@@ -70,29 +71,28 @@
         <ImageView
             android:id="@+id/image2View"
             android:layout_width="350dp"
-            android:layout_height="210dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/hospital" />
 
     </androidx.cardview.widget.CardView>
 
-
     <Button
-            android:id="@+id/findClinicsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:layout_marginBottom="138dp"
-            android:background="@color/blue_200"
-            android:text="Find Clinics"
-            android:textColor="@color/black"
-            android:visibility="visible" />
+        android:id="@+id/findClinicsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginBottom="138dp"
+        android:background="@color/blue_200"
+        android:text="Find Clinics"
+        android:textColor="@color/black"
+        android:visibility="visible" />
 
         <Button
 
@@ -110,11 +110,22 @@
             android:textColor="@color/black"
             android:visibility="visible" />
 
+    <TextView
+        android:layout_width="308dp"
+        android:layout_height="213dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="65dp"
+        android:gravity="center_horizontal"
+        android:text="hom"
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
-
-
+    
+    
         <!--    <EditText-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"-->
@@ -133,7 +144,7 @@
 <!--        android:layout_marginTop="-16dp"-->
 <!--        android:layout_marginBottom="22dp"-->
 <!--        android:columnCount="2"-->
-<!--        android:rowCount="4">-->
+<!--        android:rowCount="4">--> 
 
 <!--        <androidx.cardview.widget.CardView-->
 <!--            android:layout_width="wrap_content"-->
