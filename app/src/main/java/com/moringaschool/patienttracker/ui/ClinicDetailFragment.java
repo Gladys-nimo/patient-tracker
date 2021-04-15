@@ -117,11 +117,11 @@ public class ClinicDetailFragment extends Fragment implements View.OnClickListen
         }
         if (v == mSaveClinicButton) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String uid = user.getUid();
+//            String uid = user.getUid();
             DatabaseReference clinicRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_CLINICS)
-                    .child(uid);
+                    .getReference(Constants.FIREBASE_CHILD_CLINICS);
+//                    .child(uid);
 
             DatabaseReference pushRef = clinicRef.push();
             String pushId = pushRef.getKey();

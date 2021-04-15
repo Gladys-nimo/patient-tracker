@@ -19,51 +19,51 @@
         android:background="@color/blue_200">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
             android:id="@+id/clinicImageView"
-            android:src="@drawable/clinic"
-            android:scaleType="centerCrop" />
+            android:layout_width="396dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/clinicss" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:paddingTop="20dp"
             android:paddingLeft="10dp"
+            android:paddingTop="20dp"
             android:paddingRight="10dp"
             android:paddingBottom="20dp">
 
             <TextView
+                android:id="@+id/clinicNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Clinic Name"
-                android:id="@+id/clinicNameTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="20sp"
+                android:layout_alignParentLeft="true"
+                android:text="Clinic Name"
                 android:textColor="@color/black"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/ratingTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.5/5"
-                android:id="@+id/ratingTextView"
                 android:layout_alignTop="@+id/clinicNameTextView"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="4.5/5"
                 android:textColor="@color/blue_200"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/clinicTypeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="One Medical"
-                android:id="@+id/clinicTypeTextView"
                 android:layout_below="@+id/clinicNameTextView"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="One Medical"
                 android:textColor="@color/blue_200"
                 android:textStyle="italic" />
         </RelativeLayout>
@@ -111,16 +111,16 @@
                     app:drawableLeftCompat="@drawable/ic_call_black_18dp" />
 
                 <TextView
+                    android:id="@+id/addressTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123 SW Best Ever Ave. Portland, Oregon, 97222"
+                    android:layout_marginBottom="10dp"
                     android:drawablePadding="4dp"
-                    android:id="@+id/addressTextView"
+                    android:gravity="center_vertical"
+                    android:text="123 SW Best Ever Ave. Portland, Oregon, 97222"
                     android:textColor="@color/colorTextIcon"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_vertical"
                     app:drawableLeftCompat="@drawable/ic_location_on_white_18dp" />
 
             </LinearLayout>

@@ -12,7 +12,7 @@
             android:layout_width="130dp"
             android:layout_height="100dp"
             android:id="@+id/clinicImageView"
-            android:src="@drawable/clinic"
+            android:src="@drawable/clinicss"
             android:scaleType="centerCrop"/>
 
         <ImageView
@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="One Cuisine Type"
+            android:text="clinic Type"
             android:id="@+id/categoryTextView"
             android:layout_below="@+id/clinicNameTextView"
             android:layout_alignParentLeft="true"

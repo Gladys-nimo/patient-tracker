@@ -7,7 +7,7 @@
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:id="@+id/clinicImageView"
-        android:src="@drawable/clinic"
+        android:src="@drawable/clinicss"
         android:scaleType="centerCrop"/>
 
     <LinearLayout
