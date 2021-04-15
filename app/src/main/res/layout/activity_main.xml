@@ -42,14 +42,14 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
             android:lineSpacingExtra="6sp"
             android:paddingTop="10dp"
             android:text="Patient tracker is an online Application. \n Aids its user to search for clinics.\n It displays clinics in a certain location.\n  \n It also shows you the best hospital to visit with the condition you are suffering from.\n this application will help many nations across Kenya and Africa as well."
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal" />
+            android:textStyle="bold" />
 
 
     </androidx.cardview.widget.CardView>
