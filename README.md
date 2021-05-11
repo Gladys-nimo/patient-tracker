@@ -8,6 +8,8 @@ Clone this Repository andImport into Android Studio
 ```bash
 git clone git@github.com:Gladys-nimo/<reponame>.git
 ```
+## Technology used
+Java, Firebase, Yelp API
 ## Maintainers
 This project is maintained by:
 1. Gladys George
